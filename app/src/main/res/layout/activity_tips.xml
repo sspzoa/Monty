@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#5D6DBE"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="팁 및 설명서"
+            android:fontFamily="@font/nanumsquareeb"
+            android:textColor="#EEEEEE"
+            android:textSize="30dp" />
+
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/exit"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/exit_btn" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:background="@drawable/category_background"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#EEEEEE"
+                android:fontFamily="@font/nanumsquareb"
+                android:padding="5dp"
+                android:text="Passive - 직접 해보기"
+                android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/menu_background">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#EEEEEE"
+                    android:fontFamily="@font/nanumsquareb"
+                    android:text="가장 이해하기 쉬운 방법이지만 여러번 실험하기 어렵습니다."
+                    android:textSize="25dp"
+                    android:layout_marginBottom="15dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#EEEEEE"
+                    android:fontFamily="@font/nanumsquareb"
+                    android:text="화면에 있는 세 문 중 하나를 클릭하면 사회자가 나머지 문 중 염소가 있는 문을 공개합니다."
+                    android:textSize="25dp"
+                    android:layout_marginBottom="15dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#EEEEEE"
+                    android:fontFamily="@font/nanumsquareb"
+                    android:text="활성화된 '선택 유지', '선택 변경' 버튼 중 하나를 클릭하면 그 결과를 출력합니다."
+                    android:textSize="25dp"
+                    android:layout_marginBottom="15dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#EEEEEE"
+                    android:fontFamily="@font/nanumsquareb"
+                    android:text="결과가 출력되고 1000ms(1.0초) 뒤 문이 모두 닫히고 다음 실험을 진행할 수 있게 됩니다."
+                    android:textSize="25dp"
+                    android:layout_marginBottom="15dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#EEEEEE"
+                    android:fontFamily="@font/nanumsquareb"
+                    android:text="'초기화' 버튼을 누르면 모든 데이터가 초기화됩니다."
+                    android:textSize="25dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:background="@drawable/category_background"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#EEEEEE"
+                android:fontFamily="@font/nanumsquareb"
+                android:padding="5dp"
+                android:text="Automatic - 그래픽 환경"
+                android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/menu_background">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#EEEEEE"
+                    android:fontFamily="@font/nanumsquareb"
+                    android:text="이해하기 쉽고 결과도 어느정도 확인해 볼 수 있지만 실험 횟수가 100회로 제한되어있습니다."
+                    android:textSize="25dp"
+                    android:layout_marginBottom="15dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#EEEEEE"
+                    android:fontFamily="@font/nanumsquareb"
+                    android:text="'시작' 버튼을 누르면 위에서는 '유지했을 경우', 아래에서는 '바꾸었을 경우'의 결과를 그래픽과 함께 출력합니다."
+                    android:textSize="25dp"
+                    android:layout_marginBottom="15dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#EEEEEE"
+                    android:fontFamily="@font/nanumsquareb"
+                    android:text="2100ms(2.1초) 마다 '유지했을 경우'와 '바꾸었을 경우'의 결과를 동시에, 총 100회 계산합니다."
+                    android:textSize="25dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:background="@drawable/category_background"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#EEEEEE"
+                android:fontFamily="@font/nanumsquareb"
+                android:padding="5dp"
+                android:text="Automatic - 텍스트 환경"
+                android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/menu_background">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#EEEEEE"
+                    android:fontFamily="@font/nanumsquareb"
+                    android:text="원하는 만큼 빠른 속도로 실험해 볼 수 있습니다."
+                    android:textSize="25dp"
+                    android:layout_marginBottom="15dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#EEEEEE"
+                    android:fontFamily="@font/nanumsquareb"
+                    android:text="실험 횟수를 입력하고 '시작' 버튼을 누르면 '유지했을 경우'와 '바꾸었을 경우'의 결과만을 출력합니다."
+                    android:textSize="25dp"
+                    android:layout_marginBottom="15dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#EEEEEE"
+                    android:fontFamily="@font/nanumsquareb"
+                    android:text="기본 100ms(0.1초) 마다 '유지했을 경우'와 '바꾸었을 경우'의 결과를 동시에, 입력한 횟수 만큼 계산합니다."
+                    android:textSize="25dp"
+                    android:layout_marginBottom="15dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#EEEEEE"
+                    android:fontFamily="@font/nanumsquareb"
+                    android:text="'시작' 버튼 위치의 버튼을 다시 누르면 배속을 지정할 수 있습니다."
+                    android:textSize="25dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:background="@drawable/category_background"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#EEEEEE"
+                android:fontFamily="@font/nanumsquareb"
+                android:padding="5dp"
+                android:text="Fun - 정답 예측"
+                android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/menu_background">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#EEEEEE"
+                    android:fontFamily="@font/nanumsquareb"
+                    android:text="가장 수학적으로 정답을 찍을 수 있는 방법입니다."
+                    android:textSize="25dp"
+                    android:layout_marginBottom="15dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#EEEEEE"
+                    android:fontFamily="@font/nanumsquareb"
+                    android:text="처음 정답을 선택하면 빨간색으로 omr 카드가 칠해집니다."
+                    android:textSize="25dp"
+                    android:layout_marginBottom="15dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#EEEEEE"
+                    android:fontFamily="@font/nanumsquareb"
+                    android:text="이후 제외할 정답을 선택할 수 있으며 선택하면 파란색으로 omr 카드가 칠해집니다."
+                    android:textSize="25dp"
+                    android:layout_marginBottom="15dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#EEEEEE"
+                    android:fontFamily="@font/nanumsquareb"
+                    android:text="제외할 정답을 선택하면 활성화 되는 '확률 계산하기' 버튼을 클릭하면 정답일 확률이 가장 높은 번호가 검은색으로 칠해집니다."
+                    android:textSize="25dp"
+                    android:layout_marginBottom="15dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#EEEEEE"
+                    android:fontFamily="@font/nanumsquareb"
+                    android:text="이때, 확률이 같은 선택지가 여러 개라면 무작위로 하나가 선택됩니다."
+                    android:textSize="25dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

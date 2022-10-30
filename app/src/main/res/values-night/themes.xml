@@ -1,0 +1,13 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Monty" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">#5D6DBE</item>
+        <item name="colorPrimaryVariant">#3A4CA8</item>
+        <item name="colorOnPrimary">#EEEEEE</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">#3A4CA8</item>
+        <!-- Customize your theme here. -->
+    </style>
+</resources>
