@@ -123,8 +123,6 @@ public class GuessActivity extends AppCompatActivity {
 
             calculate_btn.setEnabled(true);
             calculate_btn.setBackgroundColor(Color.parseColor("#5D6DBE"));
-
-            command_view.setText("제외할 정답을 선택해주세요.");
         }
 
     }
@@ -136,6 +134,8 @@ public class GuessActivity extends AppCompatActivity {
 
         if (loop == 0) {
             selected_omr.setImageResource(R.drawable.omr_red);
+
+            command_view.setText("제외할 정답을 선택해주세요.");
 
             omr_value[pick] = 1;
 

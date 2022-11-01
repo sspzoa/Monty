@@ -123,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="#EEEEEE"
                     android:fontFamily="@font/nanumsquareb"
-                    android:text="RC 1.0.0"
+                    android:text="RC 1.0.1"
                     android:textSize="25dp" />
 
             </LinearLayout>
@@ -183,6 +183,33 @@
                     android:textColor="#EEEEEE"
                     android:fontFamily="@font/nanumsquareb"
                     android:text="+ 첫 번째 빌드"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/menu_background">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#EEEEEE"
+                    android:fontFamily="@font/nanumsquareb"
+                    android:text="RC 1.0.1"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#EEEEEE"
+                    android:fontFamily="@font/nanumsquareb"
+                    android:text="+ 정답 예측 오류 수정"
                     android:textSize="20dp" />
 
             </LinearLayout>
