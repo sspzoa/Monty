@@ -11,7 +11,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ExplainActivity extends AppCompatActivity {
 
-    int loop = -1;
+    private int loop = 0;
+    private static final int[] DOOR_IMAGES = {
+            R.drawable.door_closed,
+            R.drawable.door_closed,
+            R.drawable.door_closed,
+            R.drawable.door_goat,
+            R.drawable.door_car,
+            R.drawable.door_goat
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,55 +28,28 @@ public class ExplainActivity extends AppCompatActivity {
 
         ImageView[] door = new ImageView[3];
 
-        door[0] = (ImageView) findViewById(R.id.door_0);
-        door[1] = (ImageView) findViewById(R.id.door_1);
-        door[2] = (ImageView) findViewById(R.id.door_2);
+        door[0] = findViewById(R.id.door_0);
+        door[1] = findViewById(R.id.door_1);
+        door[2] = findViewById(R.id.door_2);
 
-        ImageView exit_btn;
+        ImageView exit_btn = findViewById(R.id.exit_btn);
 
-        exit_btn = (ImageView) findViewById(R.id.exit_btn);
-
-        exit_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_left_enter, R.anim.slide_left_exit);
-                finish();
-            }
+        exit_btn.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_left_enter, R.anim.slide_left_exit);
+            finish();
         });
 
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
+        Handler mainHandler = new Handler(Looper.getMainLooper());
+        Runnable updateDoors = new Runnable() {
             @Override
             public void run() {
-
-                switch (loop) {
-                    case 0:
-                        door[0].setImageResource(R.drawable.door_closed);
-                        break;
-                    case 1:
-                        door[1].setImageResource(R.drawable.door_closed);
-                        break;
-                    case 2:
-                        door[2].setImageResource(R.drawable.door_closed);
-                        break;
-                    case 3:
-                        door[0].setImageResource(R.drawable.door_goat);
-                        break;
-                    case 4:
-                        door[1].setImageResource(R.drawable.door_car);
-                        break;
-                    case 5:
-                        door[2].setImageResource(R.drawable.door_goat);
-                        loop = -1;
-                        break;
-                }
-
-                loop++;
-
-                new Handler(Looper.getMainLooper()).postDelayed(this, 1000);
+                door[loop % 3].setImageResource(DOOR_IMAGES[loop]);
+                loop = (loop + 1) % DOOR_IMAGES.length;
+                mainHandler.postDelayed(this, 1000);
             }
-        });
-
+        };
+        mainHandler.post(updateDoors);
     }
 }

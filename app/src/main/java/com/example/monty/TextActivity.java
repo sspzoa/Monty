@@ -96,38 +96,31 @@ public class TextActivity extends AppCompatActivity {
 
             public void maintain() {
 
-                // 선택은 항상 0
+                car = random.nextInt(3);
 
-                car = random.nextInt(3); // 자동차를 0~2 중 하나로 초기화
-
-                if (choice == car) { // 만약 선택이 자동차와 같다면
-                    maintain_result_cnt++; // 유지했을 경우의 결과 + 1
+                if (choice == car) {
+                    maintain_result_cnt++;
                 }
             }
 
             public void change() {
 
-                // 선택은 항상 0
-
-                car = random.nextInt(3); // 자동차를 0~2 중 하나로 초기화
+                car = random.nextInt(3);
 
                 switch (car) {
                     case 0:
-                        // 선택은 0이기 때문에 만약 선택을 바꾼다면
-                        choice = random.nextInt(2) + 1; // 선택은 1 또는 2 이다
+                        choice = random.nextInt(2) + 1;
                         break;
                     case 1:
-                        // 사회자가 2번 문을 열어주기 때문에
-                        choice = 1; // 선택은 1로 밖에 바꿀 수 없다
+                        choice = 1;
                         break;
                     case 2:
-                        // 사회자가 1번 문을 열어주기 때문에
-                        choice = 2; // 선택은 2로 밖에 바꿀 수 없다
+                        choice = 2;
                         break;
                 }
 
-                if (choice == car) { // 만약 선택이 자동차와 같다면
-                    change_result_cnt++; // 변경했을 경우의 결과 + 1
+                if (choice == car) {
+                    change_result_cnt++;
                 }
             }
 
