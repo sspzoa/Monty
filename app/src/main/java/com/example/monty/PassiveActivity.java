@@ -21,51 +21,19 @@ public class PassiveActivity extends AppCompatActivity {
     Button maintain_btn, change_btn, reset_btn;
 
     Random random = new Random();
-    int car;
+    int car = random.nextInt(3);
     int choice;
     int maintain_cnt_value = 0;
     int change_cnt_value = 0;
+    int i = 0;
+    int loop_reset = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passive);
-
         initializeViews();
-
-        reset_btn.setOnClickListener(view -> {
-            maintain_cnt_value = 0;
-            change_cnt_value = 0;
-            maintain_result_cnt = 0;
-            change_result_cnt = 0;
-
-            updateResults();
-
-            resetDoors();
-            disableButtons();
-        });
-
-        car = random.nextInt(3);
-
-        for (int i = 0; i < door.length; i++) {
-            int index = i;
-            door[i].setOnClickListener(view -> {
-                selectDoor(index);
-                enableButtons();
-            });
-        }
-
-        maintain_btn.setOnClickListener(view -> {
-            loopReset(1);
-            updateResults();
-            disableButtons();
-        });
-
-        change_btn.setOnClickListener(view -> {
-            loopReset(2);
-            updateResults();
-            disableButtons();
-        });
+        setListeners();
     }
 
     private void initializeViews() {
@@ -76,104 +44,175 @@ public class PassiveActivity extends AppCompatActivity {
         maintain_btn = findViewById(R.id.maintain_btn);
         change_btn = findViewById(R.id.change_btn);
         reset_btn = findViewById(R.id.reset_btn);
+        door[0] = findViewById(R.id.door_0);
+        door[1] = findViewById(R.id.door_1);
+        door[2] = findViewById(R.id.door_2);
 
-        ImageView exit_btn = findViewById(R.id.exit_btn);
-        exit_btn.setOnClickListener(view -> {
+        maintain_btn.setBackgroundColor(Color.parseColor("#B2B2B2"));
+        change_btn.setBackgroundColor(Color.parseColor("#B2B2B2"));
+    }
+
+    private void setListeners() {
+        findViewById(R.id.exit_btn).setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_left_enter, R.anim.slide_left_exit);
             finish();
         });
 
-        door[0] = findViewById(R.id.door_0);
-        door[1] = findViewById(R.id.door_1);
-        door[2] = findViewById(R.id.door_2);
-    }
-
-    private void selectDoor(int index) {
-        choice = index;
         for (int i = 0; i < door.length; i++) {
-            door[i].setClickable(false);
-            if (i == index) {
-                door[i].setImageResource(R.drawable.door_closed_originalpick);
-            }
+            int finalI = i;
+            door[i].setOnClickListener(view -> {
+                select(door[finalI]);
+                choice = finalI;
+                return_door(0);
+                btn_enable();
+            });
         }
+
+        maintain_btn.setOnClickListener(view -> updateGame(1));
+        change_btn.setOnClickListener(view -> updateGame(2));
+
+        reset_btn.setOnClickListener(view -> {
+            maintain_cnt_value = 0;
+            maintain_result_cnt = 0;
+            change_cnt_value = 0;
+            change_result_cnt = 0;
+
+            maintain_cnt.setText("성공: □/□");
+            maintain_result.setText("결과: □□.□%");
+            change_cnt.setText("성공: □/□");
+            change_result.setText("결과: □□.□%");
+
+            reset_door();
+            btn_disable();
+        });
     }
 
-    private void resetDoors() {
-        for (int i = 0; i < door.length; i++) {
-            door[i].setImageResource(R.drawable.door_closed);
-            door[i].setClickable(true);
+    private void updateGame(int btn_value) {
+        i = 0;
+        loop_reset = 0;
+
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                if (++i < 3) {
+                    loop_reset++;
+
+                    switch (loop_reset) {
+                        case 1:
+                            return_door(btn_value);
+                            btn_disable();
+                            print_result(btn_value);
+                            new Handler(Looper.getMainLooper()).postDelayed(this, 1000);
+                            break;
+                        case 2:
+                            reset_door();
+                            break;
+                    }
+                }
+            }
+        });
+    }
+
+    private void select(ImageView selected_door) {
+        for (ImageView door : door) {
+            door.setImageResource(R.drawable.door_closed);
+            door.setClickable(false);
+        }
+        selected_door.setImageResource(R.drawable.door_closed_originalpick);
+    }
+
+    private void reset_door() {
+        for (ImageView door : door) {
+            door.setImageResource(R.drawable.door_closed);
+            door.setClickable(true);
         }
         car = random.nextInt(3);
     }
 
-    private void enableButtons() {
-        maintain_btn.setEnabled(true);
-        change_btn.setEnabled(true);
+    private void btn_enable() {
         maintain_btn.setBackgroundColor(Color.parseColor("#5D6DBE"));
         change_btn.setBackgroundColor(Color.parseColor("#5D6DBE"));
+
+        maintain_btn.setEnabled(true);
+        change_btn.setEnabled(true);
     }
 
-    private void disableButtons() {
-        maintain_btn.setEnabled(false);
-        change_btn.setEnabled(false);
+    private void btn_disable() {
         maintain_btn.setBackgroundColor(Color.parseColor("#B2B2B2"));
         change_btn.setBackgroundColor(Color.parseColor("#B2B2B2"));
+
+        maintain_btn.setEnabled(false);
+        change_btn.setEnabled(false);
+    }
+
+    private void return_door(int btn_value) {
+        open_public();
+        if (btn_value > 0) {
+            if (btn_value == 1) {
+                open_maintain_result();
+            } else {
+                open_change_result();
+            }
+        }
+    }
+
+    ImageView change_door;
+
+    private void open_public() {
+        int[] other_doors = {0, 1, 2};
+        other_doors[choice] = -1;
+        int door1 = other_doors[0] == -1 ? other_doors[1] : other_doors[0];
+        int door2 = other_doors[2] == -1 ? other_doors[1] : other_doors[2];
+
+        if (choice == car) {
+            int temp = random.nextInt(2);
+            if (temp == 0) {
+                door[door1].setImageResource(R.drawable.door_goat_public);
+                change_door = door[door2];
+            } else {
+                door[door2].setImageResource(R.drawable.door_goat_public);
+                change_door = door[door1];
+            }
+        } else {
+            door[door2].setImageResource(R.drawable.door_goat_public);
+            change_door = door[door1];
+        }
     }
 
     int maintain_result_cnt = 0;
     int change_result_cnt = 0;
 
-    private void loopReset(int btn_value) {
-        ImageView[] otherDoors = getOtherDoors();
-        int goatDoorIndex = getGoatDoorIndex(otherDoors);
-        otherDoors[goatDoorIndex].setImageResource(R.drawable.door_goat_public);
-
-        if (btn_value == 1) {
-            if (choice == car) {
-                door[choice].setImageResource(R.drawable.door_car_originalpick);
-                maintain_result_cnt++;
-            } else {
-                door[choice].setImageResource(R.drawable.door_goat_originalpick);
-            }
-        } else {
-            ImageView change_door = otherDoors[1 - goatDoorIndex];
-            if (choice != car) {
-                change_door.setImageResource(R.drawable.door_car_changedpick);
-                change_result_cnt++;
-            } else {
-                change_door.setImageResource(R.drawable.door_goat_changedpick);
-            }
-        }
-        resetDoors();
-    }
-
-    private ImageView[] getOtherDoors() {
-        ImageView[] otherDoors = new ImageView[2];
-        int index = 0;
-        for (int i = 0; i < door.length; i++) {
-            if (i != choice) {
-                otherDoors[index++] = door[i];
-            }
-        }
-        return otherDoors;
-    }
-
-    private int getGoatDoorIndex(ImageView[] otherDoors) {
-        int goatDoorIndex;
+    private void open_maintain_result() {
         if (choice == car) {
-            goatDoorIndex = random.nextInt(2);
+            door[choice].setImageResource(R.drawable.door_car_originalpick);
+            maintain_result_cnt++;
         } else {
-            goatDoorIndex = otherDoors[0] == door[car] ? 1 : 0;
+            door[choice].setImageResource(R.drawable.door_goat_originalpick);
         }
-        return goatDoorIndex;
     }
 
-    private void updateResults() {
-        maintain_cnt.setText("성공: " + maintain_result_cnt + "/" + maintain_cnt_value);
-        maintain_result.setText("결과: " + String.format("%.1f", ((double) maintain_result_cnt / maintain_cnt_value) * 100) + "%");
-        change_cnt.setText("성공: " + change_result_cnt + "/" + change_cnt_value);
-        change_result.setText("결과: " + String.format("%.1f", ((double) change_result_cnt / change_cnt_value) * 100) + "%");
+    private void open_change_result() {
+        if (choice == car) {
+            change_door.setImageResource(R.drawable.door_goat_changedpick);
+        } else {
+            change_door.setImageResource(R.drawable.door_car_changedpick);
+            change_result_cnt++;
+        }
+    }
+
+    private void print_result(int btn_value) {
+        switch (btn_value) {
+            case 1:
+                maintain_cnt_value++;
+                maintain_cnt.setText("성공: " + maintain_result_cnt + "/" + maintain_cnt_value);
+                maintain_result.setText("결과: " + String.format("%.1f", ((double) maintain_result_cnt / maintain_cnt_value) * 100) + "%");
+                break;
+            case 2:
+                change_cnt_value++;
+                change_cnt.setText("성공: " + change_result_cnt + "/" + change_cnt_value);
+                change_result.setText("결과: " + String.format("%.1f", ((double) change_result_cnt / change_cnt_value) * 100) + "%");
+        }
     }
 }
